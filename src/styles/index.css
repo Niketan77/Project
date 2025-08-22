@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Primary Theme - Women Empowerment Colors */
+:root {
+  --primary-purple: #8B5CF6;
+  --primary-purple-dark: #7C3AED;
+  --accent-coral: #F59E0B;
+  --success-green: #10B981;
+  --warning-red: #EF4444;
+  --neutral-gray: #6B7280;
+  --light-bg: #F9FAFB;
+  --white: #FFFFFF;
+  --text-dark: #1F2937;
+}
+
+/* Component Styling Standards */
+@layer components {
+  .card-base {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+  }
+  
+  .btn-primary {
+    @apply bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-md font-medium transition-colors focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-md font-medium transition-colors focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
+  
+  .input-base {
+    @apply border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full;
+  }
+  
+  .badge-active {
+    @apply bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-seeking {
+    @apply bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-matched {
+    @apply bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

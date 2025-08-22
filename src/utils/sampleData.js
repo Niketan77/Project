@@ -1,0 +1,152 @@
+export const sampleMentors = [
+  {
+    id: '1',
+    name: 'Priya Sharma',
+    email: 'priya.sharma@techcorp.com',
+    phone: '+91-9876543210',
+    company: 'TechCorp India',
+    jobTitle: 'Senior Software Engineer',
+    yearsExperience: 8,
+    industry: 'Technology',
+    expertise: ['Technical Skills', 'Leadership', 'Career Planning'],
+    availability: 'High',
+    preferredMenteeLevel: ['Junior', 'Mid-level'],
+    communicationStyle: 'Video calls',
+    bio: 'Passionate about helping women break into tech leadership roles.',
+    matchedMentees: [],
+    profileImage: null
+  },
+  {
+    id: '2',
+    name: 'Sarah Johnson',
+    email: 'sarah.johnson@financeplus.com',
+    phone: '+1-555-0123',
+    company: 'FinancePlus',
+    jobTitle: 'VP of Marketing',
+    yearsExperience: 12,
+    industry: 'Finance',
+    expertise: ['Leadership', 'Career Planning', 'Entrepreneurship'],
+    availability: 'Medium',
+    preferredMenteeLevel: ['Mid-level', 'Senior'],
+    communicationStyle: 'In-person',
+    bio: 'Helping women navigate corporate leadership and work-life balance.',
+    matchedMentees: [],
+    profileImage: null
+  },
+  {
+    id: '3',
+    name: 'Dr. Maria Rodriguez',
+    email: 'maria.rodriguez@healthtech.com',
+    phone: '+1-555-0456',
+    company: 'HealthTech Solutions',
+    jobTitle: 'Chief Medical Officer',
+    yearsExperience: 15,
+    industry: 'Healthcare',
+    expertise: ['Leadership', 'Work-Life Balance', 'Career Planning'],
+    availability: 'Medium',
+    preferredMenteeLevel: ['Senior', 'Career Change'],
+    communicationStyle: 'Video calls',
+    bio: 'Supporting women in healthcare leadership and medical innovation.',
+    matchedMentees: ['1'],
+    profileImage: null
+  },
+  {
+    id: '4',
+    name: 'Lisa Chen',
+    email: 'lisa.chen@startup.io',
+    phone: '+1-555-0789',
+    company: 'InnovateStartup',
+    jobTitle: 'CEO & Founder',
+    yearsExperience: 10,
+    industry: 'Technology',
+    expertise: ['Entrepreneurship', 'Leadership', 'Interview Prep'],
+    availability: 'High',
+    preferredMenteeLevel: ['Junior', 'Mid-level', 'Career Change'],
+    communicationStyle: 'Video calls',
+    bio: 'Empowering women entrepreneurs and startup founders.',
+    matchedMentees: [],
+    profileImage: null
+  }
+];
+
+export const sampleMentees = [
+  {
+    id: '1',
+    name: 'Aniya Patel',
+    email: 'aniya.patel@email.com',
+    phone: '+91-9876543211',
+    currentRole: 'Junior Developer',
+    careerGoals: ['Leadership Role', 'Skill Development'],
+    skillsNeeded: ['Leadership', 'Technical Skills'],
+    experienceLevel: 'Junior',
+    industry: 'Technology',
+    challenges: ['Imposter Syndrome', 'Networking'],
+    timeCommitment: '2-4 hours/month',
+    communicationPreference: 'Video calls',
+    matchStatus: 'Matched',
+    matchedWith: 'Dr. Maria Rodriguez',
+    profileImage: null
+  },
+  {
+    id: '2',
+    name: 'Jessica Williams',
+    email: 'jessica.williams@email.com',
+    phone: '+1-555-1234',
+    currentRole: 'Marketing Coordinator',
+    careerGoals: ['Promotion', 'Leadership Role'],
+    skillsNeeded: ['Leadership', 'Career Planning'],
+    experienceLevel: 'Mid-level',
+    industry: 'Marketing',
+    challenges: ['Public Speaking', 'Negotiation'],
+    timeCommitment: '2-4 hours/month',
+    communicationPreference: 'In-person',
+    matchStatus: 'Seeking Mentor',
+    matchedWith: null,
+    profileImage: null
+  },
+  {
+    id: '3',
+    name: 'Fatima Al-Rashid',
+    email: 'fatima.alrashid@email.com',
+    phone: '+971-50-1234567',
+    currentRole: 'Student',
+    careerGoals: ['Career Change', 'Skill Development'],
+    skillsNeeded: ['Technical Skills', 'Interview Prep'],
+    experienceLevel: 'Junior',
+    industry: 'Technology',
+    challenges: ['Imposter Syndrome', 'Networking'],
+    timeCommitment: '4+ hours/month',
+    communicationPreference: 'Video calls',
+    matchStatus: 'Seeking Mentor',
+    matchedWith: null,
+    profileImage: null
+  },
+  {
+    id: '4',
+    name: 'Emma Thompson',
+    email: 'emma.thompson@email.com',
+    phone: '+44-7700-123456',
+    currentRole: 'Business Analyst',
+    careerGoals: ['Start Business', 'Leadership Role'],
+    skillsNeeded: ['Entrepreneurship', 'Leadership'],
+    experienceLevel: 'Mid-level',
+    industry: 'Finance',
+    challenges: ['Work-Life Balance', 'Negotiation'],
+    timeCommitment: '2-4 hours/month',
+    communicationPreference: 'Video calls',
+    matchStatus: 'Seeking Mentor',
+    matchedWith: null,
+    profileImage: null
+  }
+];
+
+export const sampleMatches = [
+  {
+    id: '1',
+    mentorId: '3',
+    menteeId: '1',
+    matchDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    status: 'active',
+    matchScore: 85
+  }
+];
