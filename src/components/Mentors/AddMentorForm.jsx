@@ -130,15 +130,15 @@ function AddMentorForm() {
   ];
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
+    <div className="max-w-2xl mx-auto space-y-6 lg:space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900">Add New Mentor</h1>
-        <p className="mt-2 text-gray-600">Welcome a new mentor to empower women in their careers</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Add New Mentor</h1>
+        <p className="mt-2 text-sm sm:text-base text-gray-600">Welcome a new mentor to empower women in their careers</p>
       </div>
 
       {/* Progress Steps */}
-      <div className="flex items-center justify-center space-x-8">
+      <div className="flex items-center justify-center space-x-4 lg:space-x-8">
         {steps.map((step, index) => {
           const Icon = step.icon;
           const isActive = currentStep === step.number;
@@ -146,22 +146,22 @@ function AddMentorForm() {
           
           return (
             <div key={step.number} className="flex items-center">
-              <div className={`flex items-center space-x-3 ${index < steps.length - 1 ? 'pr-8' : ''}`}>
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
+              <div className={`flex items-center space-x-2 lg:space-x-3 ${index < steps.length - 1 ? 'pr-4 lg:pr-8' : ''}`}>
+                <div className={`flex items-center justify-center w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 ${
                   isCompleted ? 'bg-purple-600 border-purple-600 text-white' :
                   isActive ? 'border-purple-600 text-purple-600' :
                   'border-gray-300 text-gray-400'
                 }`}>
-                  {isCompleted ? <Check className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
+                  {isCompleted ? <Check className="h-4 w-4 lg:h-5 lg:w-5" /> : <Icon className="h-4 w-4 lg:h-5 lg:w-5" />}
                 </div>
                 <div className="hidden sm:block">
-                  <p className={`text-sm font-medium ${isActive ? 'text-purple-600' : 'text-gray-500'}`}>
+                  <p className={`text-xs lg:text-sm font-medium ${isActive ? 'text-purple-600' : 'text-gray-500'}`}>
                     {step.title}
                   </p>
                 </div>
               </div>
               {index < steps.length - 1 && (
-                <div className={`hidden sm:block w-16 h-0.5 ${
+                <div className={`hidden sm:block w-8 lg:w-16 h-0.5 ${
                   currentStep > step.number ? 'bg-purple-600' : 'bg-gray-300'
                 }`} />
               )}
@@ -171,8 +171,8 @@ function AddMentorForm() {
       </div>
 
       {/* Form */}
-      <div className="card-base">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="card-base mobile-card">
+        <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
           {/* Step 1: Basic Information */}
           {currentStep === 1 && (
             <div className="space-y-6">

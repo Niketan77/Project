@@ -17,15 +17,15 @@ function MenteesList() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Mentees</h1>
-          <p className="text-gray-600">Support women on their career journey through mentorship</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Mentees</h1>
+          <p className="text-sm sm:text-base text-gray-600">Support women on their career journey through mentorship</p>
         </div>
         <Link to="/mentees/add">
-          <Button className="flex items-center space-x-2">
+          <Button className="flex items-center space-x-2 w-full sm:w-auto justify-center">
             <Plus className="h-4 w-4" />
             <span>Add New Mentee</span>
           </Button>
@@ -71,7 +71,7 @@ function MenteesList() {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredMentees.map(mentee => (
             <MenteeCard key={mentee.id} mentee={mentee} />
           ))}

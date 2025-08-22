@@ -12,16 +12,16 @@ function MetricCard({ title, value, icon: Icon, color, growth, link }) {
   const CardContent = () => (
     <div className="flex items-center">
       <div className="flex-1">
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+        <p className="text-xs sm:text-sm font-medium text-gray-600">{title}</p>
+        <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{value}</p>
         {growth && (
-          <p className="text-sm text-green-600 mt-1">
+          <p className="text-xs sm:text-sm text-green-600 mt-1">
             <span className="font-medium">{growth}</span> from last month
           </p>
         )}
       </div>
-      <div className={`p-3 rounded-lg ${colorClasses[color]}`}>
-        <Icon className="h-6 w-6" />
+      <div className={`p-2 sm:p-3 rounded-lg ${colorClasses[color]}`}>
+        <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
       </div>
     </div>
   );

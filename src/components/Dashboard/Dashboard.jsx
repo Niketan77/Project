@@ -61,34 +61,34 @@ function Dashboard() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg p-8 text-white">
-        <h1 className="text-3xl font-bold mb-2">Welcome to AspireCRM</h1>
-        <p className="text-purple-100 text-lg mb-6">
+      <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg p-4 sm:p-6 lg:p-8 text-white">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">Welcome to AspireCRM</h1>
+        <p className="text-purple-100 text-sm sm:text-base lg:text-lg mb-4 lg:mb-6">
           Empowering women through smart mentorship management and meaningful connections.
         </p>
-        <div className="flex flex-wrap gap-4">
-          <div className="bg-white bg-opacity-20 rounded-lg p-4">
-            <div className="text-2xl font-bold">{totalMentors + totalMentees}</div>
-            <div className="text-sm text-purple-100">Total Community Members</div>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="bg-white bg-opacity-20 rounded-lg p-3 sm:p-4 flex-1">
+            <div className="text-xl sm:text-2xl font-bold">{totalMentors + totalMentees}</div>
+            <div className="text-xs sm:text-sm text-purple-100">Total Community Members</div>
           </div>
-          <div className="bg-white bg-opacity-20 rounded-lg p-4">
-            <div className="text-2xl font-bold">{matches.length}</div>
-            <div className="text-sm text-purple-100">Relationships Formed</div>
+          <div className="bg-white bg-opacity-20 rounded-lg p-3 sm:p-4 flex-1">
+            <div className="text-xl sm:text-2xl font-bold">{matches.length}</div>
+            <div className="text-xs sm:text-sm text-purple-100">Relationships Formed</div>
           </div>
         </div>
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {metrics.map((metric, index) => (
           <MetricCard key={index} {...metric} />
         ))}
       </div>
 
       {/* Quick Actions and Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         <div className="lg:col-span-1">
           <QuickActions />
         </div>

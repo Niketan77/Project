@@ -46,6 +46,41 @@
   }
 }
 
+/* Mobile Responsive Styles */
+@layer utilities {
+  .mobile-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-text {
+    @apply text-sm sm:text-base;
+  }
+  
+  .mobile-btn {
+    @apply px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base;
+  }
+  
+  .mobile-card {
+    @apply p-4 sm:p-6;
+  }
+  
+  .mobile-grid {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .mobile-flex {
+    @apply flex-col sm:flex-row;
+  }
+  
+  .mobile-hidden {
+    @apply hidden sm:block;
+  }
+  
+  .mobile-show {
+    @apply block sm:hidden;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
