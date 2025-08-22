@@ -1,4 +1,4 @@
-# AspireCRM - Smart Mentorship Management System
+<!-- # AspireCRM - Smart Mentorship Management System -->
 
 A modern, responsive web application for managing mentorship programs with intelligent mentor-mentee matching capabilities.
 
@@ -105,22 +105,5 @@ src/
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👨‍💻 Developer
-
-**Niketan Agrawal**
-- GitHub: [@Niketan77](https://github.com/Niketan77)
-
-## 🙏 Acknowledgments
-
-- Built with modern React patterns and best practices
-- UI inspired by contemporary CRM and management systems
-- Matching algorithm designed for real-world mentorship scenarios
-
----
 
 ⭐ If you found this project helpful, please give it a star on GitHub!

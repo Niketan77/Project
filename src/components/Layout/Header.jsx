@@ -23,7 +23,7 @@ function Header() {
           
           <div className="flex items-center space-x-4">
             {/* <div className="hidden md:block text-sm text-gray-500">
-              Aspire For Her
+              name
             </div> */}
           </div>
         </div>
