@@ -29,5 +29,6 @@ export const storage = {
 export const STORAGE_KEYS = {
   MENTORS: 'aspire_mentors',
   MENTEES: 'aspire_mentees',
-  MATCHES: 'aspire_matches'
+  MATCHES: 'aspire_matches',
+  ACTIVITIES: 'aspire_activities'
 };

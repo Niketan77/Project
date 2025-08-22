@@ -8,6 +8,7 @@ const initialState = {
   mentors: [],
   mentees: [],
   matches: [],
+  activities: [],
   loading: false,
   error: null
 };
@@ -23,7 +24,20 @@ function appReducer(state, action) {
         ...state,
         mentors: action.payload.mentors,
         mentees: action.payload.mentees,
-        matches: action.payload.matches
+        matches: action.payload.matches,
+        activities: action.payload.activities || []
+      };
+    case 'ADD_ACTIVITY':
+      const newActivity = {
+        id: Date.now().toString(),
+        type: action.payload.type,
+        message: action.payload.message,
+        timestamp: new Date().toISOString(),
+        data: action.payload.data || {}
+      };
+      return {
+        ...state,
+        activities: [newActivity, ...state.activities.slice(0, 9)] // Keep only 10 recent activities
       };
     case 'ADD_MENTOR':
       return {
@@ -84,11 +98,24 @@ export function AppProvider({ children }) {
       const mentors = storage.load(STORAGE_KEYS.MENTORS, sampleMentors);
       const mentees = storage.load(STORAGE_KEYS.MENTEES, sampleMentees);
       const matches = storage.load(STORAGE_KEYS.MATCHES, sampleMatches);
+      const activities = storage.load(STORAGE_KEYS.ACTIVITIES, []);
       
       dispatch({
         type: 'LOAD_DATA',
-        payload: { mentors, mentees, matches }
+        payload: { mentors, mentees, matches, activities }
       });
+
+      // Add initial activity if no activities exist
+      if (activities.length === 0) {
+        dispatch({
+          type: 'ADD_ACTIVITY',
+          payload: {
+            type: 'system',
+            message: `System initialized with ${mentors.length + mentees.length} community members`,
+            data: { mentors: mentors.length, mentees: mentees.length }
+          }
+        });
+      }
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: 'Failed to load data' });
     }
@@ -105,18 +132,51 @@ export function AppProvider({ children }) {
     if (state.matches.length > 0) {
       storage.save(STORAGE_KEYS.MATCHES, state.matches);
     }
-  }, [state.mentors, state.mentees, state.matches]);
+    if (state.activities.length > 0) {
+      storage.save(STORAGE_KEYS.ACTIVITIES, state.activities);
+    }
+  }, [state.mentors, state.mentees, state.matches, state.activities]);
 
   const addMentor = (mentor) => {
     dispatch({ type: 'ADD_MENTOR', payload: mentor });
+    dispatch({
+      type: 'ADD_ACTIVITY',
+      payload: {
+        type: 'mentor_added',
+        message: `New mentor added: ${mentor.name}`,
+        data: { mentorId: Date.now().toString(), name: mentor.name }
+      }
+    });
   };
 
   const addMentee = (mentee) => {
     dispatch({ type: 'ADD_MENTEE', payload: { ...mentee, matchStatus: 'Seeking Mentor', matchedWith: null } });
+    dispatch({
+      type: 'ADD_ACTIVITY',
+      payload: {
+        type: 'mentee_added',
+        message: `New mentee registered: ${mentee.name}`,
+        data: { menteeId: Date.now().toString(), name: mentee.name }
+      }
+    });
   };
 
   const createMatch = (mentorId, menteeId, score) => {
+    const mentor = state.mentors.find(m => m.id === mentorId);
+    const mentee = state.mentees.find(m => m.id === menteeId);
+    
     dispatch({ type: 'CREATE_MATCH', payload: { mentorId, menteeId, score } });
+    
+    if (mentor && mentee) {
+      dispatch({
+        type: 'ADD_ACTIVITY',
+        payload: {
+          type: 'match_created',
+          message: `Match created: ${mentee.name} & ${mentor.name}`,
+          data: { mentorId, menteeId, mentorName: mentor.name, menteeName: mentee.name, score }
+        }
+      });
+    }
   };
 
   const value = {

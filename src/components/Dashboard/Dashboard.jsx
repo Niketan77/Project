@@ -5,7 +5,36 @@ import QuickActions from './QuickActions';
 import { Users, UserPlus, Link } from 'lucide-react';
 
 function Dashboard() {
-  const { totalMentors, totalMentees, activeMatches, matches } = useApp();
+  const { totalMentors, totalMentees, activeMatches, matches, activities } = useApp();
+
+  // Helper function to format time ago
+  const getTimeAgo = (timestamp) => {
+    const now = new Date();
+    const activityTime = new Date(timestamp);
+    const diffInMinutes = Math.floor((now - activityTime) / (1000 * 60));
+    
+    if (diffInMinutes < 1) return 'Just now';
+    if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+    
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 7) return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    
+    return activityTime.toLocaleDateString();
+  };
+
+  // Get activity color based on type
+  const getActivityColor = (type) => {
+    switch (type) {
+      case 'mentor_added': return 'bg-purple-500';
+      case 'mentee_added': return 'bg-blue-500';
+      case 'match_created': return 'bg-green-500';
+      case 'system': return 'bg-gray-500';
+      default: return 'bg-gray-500';
+    }
+  };
 
   const metrics = [
     {
@@ -13,7 +42,6 @@ function Dashboard() {
       value: totalMentors,
       icon: Users,
       color: 'purple',
-      growth: '+12%',
       link: '/mentors'
     },
     {
@@ -21,7 +49,6 @@ function Dashboard() {
       value: totalMentees,
       icon: UserPlus,
       color: 'blue',
-      growth: '+8%',
       link: '/mentees'
     },
     {
@@ -29,7 +56,6 @@ function Dashboard() {
       value: activeMatches,
       icon: Link,
       color: 'green',
-      growth: '+15%',
       link: '/matches'
     }
   ];
@@ -71,27 +97,21 @@ function Dashboard() {
           <div className="card-base">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-900">New mentor added: Priya Sharma</p>
-                  <p className="text-xs text-gray-500">2 hours ago</p>
+              {activities.length > 0 ? (
+                activities.slice(0, 5).map((activity) => (
+                  <div key={activity.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div className={`w-2 h-2 ${getActivityColor(activity.type)} rounded-full`}></div>
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-900">{activity.message}</p>
+                      <p className="text-xs text-gray-500">{getTimeAgo(activity.timestamp)}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="flex items-center justify-center py-8 text-gray-500">
+                  <p className="text-sm">No recent activities. Start by adding mentors and mentees!</p>
                 </div>
-              </div>
-              <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-900">Match created: Aniya & Dr. Maria</p>
-                  <p className="text-xs text-gray-500">1 day ago</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-900">New mentee registered: Jessica Williams</p>
-                  <p className="text-xs text-gray-500">2 days ago</p>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
