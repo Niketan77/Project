@@ -16,6 +16,12 @@ const INDUSTRY_OPTIONS = [
   'Consulting', 'Manufacturing', 'Retail', 'Non-profit', 'Government'
 ];
 
+const ROLE_FUNCTION_OPTIONS = [
+  'Engineering', 'Marketing', 'C-Suite Leadership', 'Entrepreneurship',
+  'Sales', 'Product Management', 'Operations', 'Finance', 'Strategy & Operations',
+  'Brand Management'
+];
+
 function AddMentorForm() {
   const navigate = useNavigate();
   const { addMentor } = useApp();
@@ -32,6 +38,7 @@ function AddMentorForm() {
     // Step 2: Professional Details
     company: '',
     jobTitle: '',
+    roleFunction: '',
     yearsExperience: '',
     industry: '',
     bio: '',
@@ -74,6 +81,7 @@ function AddMentorForm() {
     if (step === 2) {
       if (!formData.company.trim()) newErrors.company = 'Company is required';
       if (!formData.jobTitle.trim()) newErrors.jobTitle = 'Job title is required';
+      if (!formData.roleFunction) newErrors.roleFunction = 'Role function is required';
       if (!formData.yearsExperience) newErrors.yearsExperience = 'Years of experience is required';
       if (!formData.industry) newErrors.industry = 'Industry is required';
     }
@@ -226,6 +234,25 @@ function AddMentorForm() {
                     onChange={(e) => updateField('jobTitle', e.target.value)}
                     error={errors.jobTitle}
                   />
+                  
+                  <div>
+                    <label htmlFor="roleFunction" className="block text-sm font-medium text-gray-700 mb-1">
+                      Role Function <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="roleFunction"
+                      className="input-base"
+                      value={formData.roleFunction}
+                      onChange={(e) => updateField('roleFunction', e.target.value)}
+                      required
+                    >
+                      <option value="">Select role function</option>
+                      {ROLE_FUNCTION_OPTIONS.map(role => (
+                        <option key={role} value={role}>{role}</option>
+                      ))}
+                    </select>
+                    {errors.roleFunction && <p className="text-sm text-red-600 mt-1">{errors.roleFunction}</p>}
+                  </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>

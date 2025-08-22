@@ -28,6 +28,12 @@ const INDUSTRY_OPTIONS = [
   'Consulting', 'Manufacturing', 'Retail', 'Non-profit', 'Government'
 ];
 
+const DESIRED_ROLE_FUNCTION_OPTIONS = [
+  'Engineering', 'Marketing', 'C-Suite Leadership', 'Entrepreneurship',
+  'Sales', 'Product Management', 'Operations', 'Finance', 'Strategy & Operations',
+  'Brand Management'
+];
+
 function AddMenteeForm() {
   const navigate = useNavigate();
   const { addMentee } = useApp();
@@ -43,6 +49,7 @@ function AddMenteeForm() {
     
     // Step 2: Career Information
     currentRole: '',
+    desiredRoleFunction: '',
     careerGoals: [],
     experienceLevel: '',
     industry: '',
@@ -84,6 +91,7 @@ function AddMenteeForm() {
 
     if (step === 2) {
       if (!formData.currentRole.trim()) newErrors.currentRole = 'Current role is required';
+      if (!formData.desiredRoleFunction) newErrors.desiredRoleFunction = 'Desired role function is required';
       if (formData.careerGoals.length === 0) newErrors.careerGoals = 'Please select at least one career goal';
       if (!formData.experienceLevel) newErrors.experienceLevel = 'Experience level is required';
       if (!formData.industry) newErrors.industry = 'Industry is required';
@@ -228,6 +236,25 @@ function AddMenteeForm() {
                     error={errors.currentRole}
                     placeholder="e.g., Software Developer, Student, Between Jobs"
                   />
+                  
+                  <div>
+                    <label htmlFor="desiredRoleFunction" className="block text-sm font-medium text-gray-700 mb-1">
+                      Desired Role Function <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="desiredRoleFunction"
+                      className="input-base"
+                      value={formData.desiredRoleFunction}
+                      onChange={(e) => updateField('desiredRoleFunction', e.target.value)}
+                      required
+                    >
+                      <option value="">Select desired role function</option>
+                      {DESIRED_ROLE_FUNCTION_OPTIONS.map(role => (
+                        <option key={role} value={role}>{role}</option>
+                      ))}
+                    </select>
+                    {errors.desiredRoleFunction && <p className="text-sm text-red-600 mt-1">{errors.desiredRoleFunction}</p>}
+                  </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>

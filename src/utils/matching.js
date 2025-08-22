@@ -11,22 +11,50 @@ export function calculateMatchScore(mentor, mentee) {
   const mentorExpertise = mentor.expertise || [];
   const menteeSkillsNeeded = mentee.skillsNeeded || [];
   
-  // Expertise overlap (35% weight) - Fixed division by zero
+  // 1. Skills Match (30% weight) - Highest Priority
   const skillMatches = mentorExpertise.filter(skill => 
     menteeSkillsNeeded.includes(skill)
   );
   
   let skillScore = 0;
   if (menteeSkillsNeeded.length > 0) {
-    skillScore = (skillMatches.length / menteeSkillsNeeded.length) * 35;
+    skillScore = (skillMatches.length / menteeSkillsNeeded.length) * 30;
   }
   score += skillScore;
   
   if (skillMatches.length > 0) {
     reasons.push(`${skillMatches.length} matching skills: ${skillMatches.join(', ')}`);
   }
+
+  // 2. Role Function Match (25% weight) - Second Priority
+  if (mentor.roleFunction && mentee.desiredRoleFunction) {
+    if (mentor.roleFunction === mentee.desiredRoleFunction) {
+      score += 25;
+      reasons.push(`Perfect role function match: ${mentor.roleFunction}`);
+    } else {
+      // Related role functions (partial credit)
+      const relatedRoleFunctions = {
+        'Engineering': ['Engineering', 'Product Management', 'Strategy & Operations'],
+        'Marketing': ['Marketing', 'Sales', 'Brand Management'],
+        'C-Suite Leadership': ['C-Suite Leadership', 'Strategy & Operations', 'Entrepreneurship'],
+        'Entrepreneurship': ['Entrepreneurship', 'C-Suite Leadership', 'Strategy & Operations'],
+        'Sales': ['Sales', 'Marketing', 'Business Development'],
+        'Product Management': ['Product Management', 'Engineering', 'Strategy & Operations'],
+        'Operations': ['Operations', 'Strategy & Operations', 'Engineering'],
+        'Finance': ['Finance', 'Strategy & Operations', 'Operations'],
+        'Strategy & Operations': ['Strategy & Operations', 'C-Suite Leadership', 'Operations'],
+        'Brand Management': ['Brand Management', 'Marketing', 'Sales']
+      };
+      
+      const mentorRelatedRoles = relatedRoleFunctions[mentor.roleFunction] || [];
+      if (mentorRelatedRoles.includes(mentee.desiredRoleFunction)) {
+        score += 12.5;
+        reasons.push(`Related role function: ${mentor.roleFunction} → ${mentee.desiredRoleFunction}`);
+      }
+    }
+  }
   
-  // Industry alignment (20% weight) - Improved logic
+  // 3. Industry alignment (20% weight) - Third Priority
   if (mentor.industry && mentee.industry) {
     if (mentor.industry === mentee.industry) {
       score += 20;
@@ -49,7 +77,7 @@ export function calculateMatchScore(mentor, mentee) {
     }
   }
   
-  // Experience level appropriateness (20% weight) - Fixed logic
+  // 4. Experience level appropriateness (15% weight) - Fourth Priority
   const menteeExpYears = getMenteeExperienceYears(mentee.experienceLevel);
   const mentorExpYears = parseMentorExperience(mentor.yearsExperience);
   
@@ -58,36 +86,36 @@ export function calculateMatchScore(mentor, mentee) {
     
     // Ideal gap: 3-10 years for effective mentorship
     if (expGap >= 3 && expGap <= 10) {
-      score += 20;
+      score += 15;
       reasons.push('Ideal experience gap for mentorship');
     } else if (expGap >= 2 && expGap <= 12) {
-      score += 15;
+      score += 11;
       reasons.push('Good experience gap for mentorship');
     } else if (expGap >= 1 && expGap <= 15) {
-      score += 10;
+      score += 7;
       reasons.push('Acceptable experience gap');
     }
   }
   
-  // Communication style compatibility (15% weight) - New feature
+  // 5. Communication style compatibility (10% weight) - Fifth Priority
   if (mentor.communicationStyle && mentee.communicationPreference) {
     if (mentor.communicationStyle === mentee.communicationPreference) {
-      score += 15;
+      score += 10;
       reasons.push('Perfect communication style match');
     } else {
       // Partial matches
       const compatible = areCommStylesCompatible(mentor.communicationStyle, mentee.communicationPreference);
       if (compatible) {
-        score += 8;
+        score += 5;
         reasons.push('Compatible communication styles');
       }
     }
   }
   
-  // Availability (10% weight) - Improved logic
+  // Additional factors (bonus points, not part of main score)
   const availabilityScore = getAvailabilityScore(mentor.availability);
-  score += availabilityScore;
-  if (availabilityScore > 0) {
+  if (availabilityScore > 5) {
+    score += 2; // Small bonus for high availability
     reasons.push(`${mentor.availability || 'Unknown'} availability for mentoring`);
   }
   
