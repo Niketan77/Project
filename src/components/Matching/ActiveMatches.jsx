@@ -87,28 +87,6 @@ function ActiveMatches() {
             </div>
           </div>
         </div>
-        
-        <div className="card-base">
-          <div className="flex items-center space-x-3">
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <Calendar className="h-6 w-6 text-purple-600" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900">
-                {activeMatches.length > 0 
-                  ? Math.round(
-                      activeMatches.reduce((sum, match) => {
-                        const days = (new Date() - new Date(match.matchDate)) / (1000 * 60 * 60 * 24);
-                        return sum + days;
-                      }, 0) / activeMatches.length
-                    )
-                  : 0
-                }
-              </p>
-              <p className="text-sm text-gray-600">Avg Days Active</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Active Matches List */}

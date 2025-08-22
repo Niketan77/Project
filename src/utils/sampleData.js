@@ -35,8 +35,8 @@ export const sampleMentors = [
   },
   {
     id: '3',
-    name: 'Dr. Manthan Thakur',
-    email: 'manthan.thakur@healthtech.com',
+    name: 'Dr. Meena Thakur',
+    email: 'meena.thakur@healthtech.com',
     phone: '+91-9055589456',
     company: 'HealthTech Solutions',
     jobTitle: 'Chief Medical Officer',
@@ -84,13 +84,13 @@ export const sampleMentees = [
     timeCommitment: '2-4 hours/month',
     communicationPreference: 'Video calls',
     matchStatus: 'Matched',
-    matchedWith: 'Dr. Maria Rodriguez',
+    matchedWith: 'Dr. Meena Thakur',
     profileImage: null
   },
   {
     id: '2',
-    name: 'Suraj Patel',
-    email: 'suraj.patel@email.com',
+    name: 'Shushma Patel',
+    email: 'shushma.patel@email.com',
     phone: '+91-9855510234',
     currentRole: 'Marketing Coordinator',
     careerGoals: ['Promotion', 'Leadership Role'],
